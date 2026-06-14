@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './App.css';
 
 const DEFAULT_CATEGORIES = [
@@ -133,6 +133,12 @@ function AddPanel({ categories, editingNote, onSave, onCancelEdit, font, onFontC
   const titleRef = useRef(null);
 
   // populate form when editing
+const reset = useCallback(() => {
+  setTitle('');
+  setTasksText('');
+  setColor(NOTE_COLORS[0].value);
+  setCatId(categories[0]?.id || 'general');
+}, [categories]);
   useEffect(() => {
     if (editingNote) {
       setTitle(editingNote.title || '');
@@ -142,14 +148,9 @@ function AddPanel({ categories, editingNote, onSave, onCancelEdit, font, onFontC
     } else {
       reset();
     }
-  }, [editingNote]);
+  }, [editingNote, categories, reset]);
 
-  function reset() {
-    setTitle('');
-    setTasksText('');
-    setColor(NOTE_COLORS[0].value);
-    setCatId(categories[0]?.id || 'general');
-  }
+
 
   function handleSave() {
     if (!title.trim()) return;
