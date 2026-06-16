@@ -54,7 +54,7 @@ npm start
 
 ## 👨‍💻 Author
 
-Yaswanth Kumar
+Yaswanth Kumar Kolla
 
 Final Year Student
 
